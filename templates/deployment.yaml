@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "targilArgo.fullname" . | default "targil" | quote  }}
+  name: {{ include "targil_argo.fullname" . | default "targil" | quote  }}
   labels:
-    {{ include "targilArgo" . | nindent 4 }}
+    {{ include "targil_argo" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{ include "targilArgo.selectorLabels" . | nindent 6 }}
+      {{ include "targil_argo.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{ include "targilArgo.selectorLabels" . | nindent 8 }}
+        {{ include "targil_argo.selectorLabels" . | nindent 8 }}
     spec:
-      serviceAccountName: {{ include "targilArgo.serviceAccountName" .  }}
+      serviceAccountName: {{ include "targil_argo.serviceAccountName" .  }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.app.image.repository }}:{{ .Values.app.image.tag | default .Chart.AppVersion }}"
