@@ -1,14 +1,14 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name:  {{ include "targilArgo.fullname" . | default "targil" | quote  }}
+  name:  {{ include "targil_argo.fullname" . | default "targil" | quote  }}
   labels:
-    {{ include "targilArgo" . | nindent 4 }}
+    {{ include "targil_argo" . | nindent 4 }}
 spec:
   replicas: {{ .Values.app.replicaCount }}
   selector:
     matchLabels:
-      {{ include "targilArgo.selectorLabels" . | nindent 6 }}   
+      {{ include "targil_argo.selectorLabels" . | nindent 6 }}   
     spec:
       containers:
       - image: "{{ .Values.mysql.image.name }}:{{ .Values.mysql.image.tag }}"
